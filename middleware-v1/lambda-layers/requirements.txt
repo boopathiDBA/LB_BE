@@ -1,0 +1,15 @@
+fastapi~=0.88.0
+google-search-results
+marshmallow_dataclass
+path~=16.6.0
+mangum~=0.17.0
+httpx~=0.23.1
+validators~=0.20.0
+jinja2
+fuzzywuzzy
+inflect
+tldextract
+cachetools
+psycopg2-binary
+aws-psycopg2
+aws_xray_sdk

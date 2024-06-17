@@ -1,0 +1,15 @@
+**/__pycache__
+
+# adding local environment files
+env/*
+
+.DS_Store
+.idea/
+
+# build files
+*.zip
+.terraform*
+cloud/builds
+node_modules/*
+.serverless*
+lambda-layers/node_modules*

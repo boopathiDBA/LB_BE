@@ -1,0 +1,88 @@
+openapi: "3.0.0"
+info:
+    version: "1.0.0"
+    title: "Search service"
+    description: BE Search service
+
+paths:
+    /offer/ext:
+        parameters:
+            - name: url
+              description: offer url
+              in: query
+              required: true
+              schema:
+                  $ref: "#/components/schemas/url"
+
+
+        get:
+            summary: search offers by url
+            responses:
+                "200":
+                    description: The offers corresponding to the provided `url`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/offers"
+                404:
+                    description: No offers found `title`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/error"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/error"
+components:
+    schemas:
+        url:
+            description: The offer url
+            type: string
+        offers:
+            description: A list of offers
+            type: array
+            items:
+                $ref: '#/definitions/offer'
+        offer:
+            type: object
+            required:
+                - id
+                - title
+                - description
+                - offer_url
+                - image_url
+                - store_name
+                - price
+                - in_stock
+                - source
+                - confidence
+
+            properties:
+                id:
+                    type: integer
+                title:
+                    type: string
+                description:
+                    type: string
+                offer_url:
+                    type: string
+                image_url:
+                    type: string
+                store_name:
+                    type: string
+                price:
+                    type: number
+                in_stock:
+                    type: boolean
+                confidence:
+                    type: string
+        error:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    description: A human readable error message

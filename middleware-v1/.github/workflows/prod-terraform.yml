@@ -1,0 +1,47 @@
+name: prod deploy terraform
+on:
+  push:
+    paths:
+      - '!**'
+      - 'cloud/**'
+      - 'app/**'
+      - 'lambda-layers/**'
+    branches:
+      - main
+jobs:
+  uat-terraform:
+    runs-on: wprod-ec2
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: List directory
+        run: |
+          ls -ltr ${{ github.workspace }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: ap-southeast-2
+
+      - name: Deploy lambda layer
+        run: |
+          cd ${{ github.workspace }}/lambda-layers
+          source /root/.bash_profile
+          serverless plugin install -n serverless-python-requirements
+          serverless deploy --verbose --stage prod
+
+      - name: Apply infrastructure
+        run: |
+          cd ${{ github.workspace }}/cloud
+          tfswitch
+          terraform init
+          terraform workspace select prod
+          terraform apply \
+            -var-file vars/prod/common.tfvars \
+            -auto-approve
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."

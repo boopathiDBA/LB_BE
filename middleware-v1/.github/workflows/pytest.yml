@@ -1,0 +1,34 @@
+name: uat pytest
+on:
+  pull_request:
+    branches: [uat, main]
+    types: [opened, synchronize]
+
+jobs:
+  uat-pytest:
+    runs-on: wuat-ec2
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: List directory
+        run: |
+          ls -ltr ${{ github.workspace }}
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements.txt
+
+      - name: Test with pytest
+        run: |
+          pip3 install pytest
+          pip3 install pytest-cov
+          pytest -v
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."

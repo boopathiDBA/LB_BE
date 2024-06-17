@@ -1,0 +1,30 @@
+environment               = "prod"
+aws_region                = "ap-southeast-2"
+vpc_base_cidr_block       = "172.16.210.0/24"
+domain_name               = "web.littlebirdie.com.au"
+cache_domain_name         = "c.web.littlebirdie.com.au"
+subject_alternative_names = ["s.web.littlebirdie.com.au"]
+destination_cidr_block    = "172.16.250.0/24"
+aladdin_cidr_block        = "172.18.240.0/20"
+root_cidr_block           = "10.0.0.0/16"
+
+merge_external_vars = {
+  "REGION"      = "ap-southeast-2",
+  "LB_BASE_URL" = "https://blue.littlebirdie.com.au/",
+  "GENIE_BASE_URL" = "https://cass.ingest.littlebirdie.com.au",
+  "LB_WEB_BASE_URL" = "https://s.web.littlebirdie.com.au",
+  "ALADDIN_API_TIMEOUT" = "2",
+  "DEPLOY_ENV"  = "prod",
+  "RUN_ENV"  = "prod",
+  "POWERTOOLS_SERVICE_NAME"  = "prod-search-api",
+  "SENTRY_DSN"  = "https://33a0e25163264e379eded4e2fd5a35f6@o1071790.ingest.sentry.io/4504371216908288",
+  "OPENSEARCH_HOST" = "https://search.stream.littlebirdie.com.au",
+  "OPENSEARCH_INDEX" = "a_deals",
+  "IMAGE_DEFAULT" = "https://www.littlebirdie.com.au/static/media/no-image.300f547e81763cbc0bb4.jpg",
+  "SCRAPING_URL" = "https://cass.ingest.littlebirdie.com.au/v2/deal-scrape",
+  "BOOTSTRAP_SERVERS" = "b-3.lb-msk-prod-01.vcf1kr.c3.kafka.ap-southeast-2.amazonaws.com:9092,b-2.lb-msk-prod-01.vcf1kr.c3.kafka.ap-southeast-2.amazonaws.com:9092,b-1.lb-msk-prod-01.vcf1kr.c3.kafka.ap-southeast-2.amazonaws.com:9092",
+  "SQS_UPDATE_QUEUE" = "https://sqs.ap-southeast-2.amazonaws.com/765393861865/prod-lb-deal-update",
+  "SQS_REQUESTS_QUEUE" = "https://sqs.ap-southeast-2.amazonaws.com/765393861865/prod-ondemand-scrape",
+  "LOG_LEVEL" = "error",
+  "FRAGMENT_FOR_REFRESH_FLAG" = "#lb-gs=0"
+}

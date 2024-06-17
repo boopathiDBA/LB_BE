@@ -1,0 +1,30 @@
+environment               = "uat"
+aws_region                = "ap-southeast-2"
+vpc_base_cidr_block       = "172.16.212.0/24"
+domain_name               = "web.littlebirdie.dev"
+cache_domain_name         = "c.web.littlebirdie.dev"
+subject_alternative_names = ["s.web.littlebirdie.dev"]
+destination_cidr_block    = "172.16.252.0/24"
+aladdin_cidr_block        = "172.19.240.0/20"
+root_cidr_block           = "172.30.0.0/16"
+
+merge_external_vars = {
+  "REGION"      = "ap-southeast-2",
+  "LB_BASE_URL" = "https://blue.littlebirdie.dev/",
+  "GENIE_BASE_URL" = "https://cass.ingest.littlebirdie.dev",
+  "LB_WEB_BASE_URL" = "https://s.web.littlebirdie.dev",
+  "ALADDIN_API_TIMEOUT" = "30",
+  "DEPLOY_ENV"  = "uat",
+  "RUN_ENV"  = "uat",
+  "POWERTOOLS_SERVICE_NAME"  = "uat-search-api",
+  "SENTRY_DSN"  = "https://33a0e25163264e379eded4e2fd5a35f6@o1071790.ingest.sentry.io/4504371216908288",
+  "OPENSEARCH_HOST" = "https://search.stream.littlebirdie.dev",
+  "OPENSEARCH_INDEX" = "a_deals",
+  "IMAGE_DEFAULT" = "https://littlebirdie.dev/static/media/no-image.300f547e81763cbc0bb4.jpg",
+  "SCRAPING_URL" = "https://cass.ingest.littlebirdie.dev/v2/deal-scrape",
+  "BOOTSTRAP_SERVERS" = "b-3.lb-msk-uat-01.ixmnnk.c3.kafka.ap-southeast-2.amazonaws.com:9092,b-2.lb-msk-uat-01.ixmnnk.c3.kafka.ap-southeast-2.amazonaws.com:9092,b-1.lb-msk-uat-01.ixmnnk.c3.kafka.ap-southeast-2.amazonaws.com:9092",
+  "SQS_UPDATE_QUEUE" = "https://sqs.ap-southeast-2.amazonaws.com/710613906184/uat-lb-deal-update",
+  "SQS_REQUESTS_QUEUE" = "https://sqs.ap-southeast-2.amazonaws.com/710613906184/uat-ondemand-scrape",
+  "LOG_LEVEL" = "debug",
+  "FRAGMENT_FOR_REFRESH_FLAG" = "#lb-gs=0"
+}

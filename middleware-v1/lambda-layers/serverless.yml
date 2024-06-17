@@ -1,0 +1,41 @@
+service: browser-extension-layer
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: "ap-southeast-2"
+  tracing:
+    lambda: true
+  logs:
+    frameworkLambda: true
+  runtime: python3.8
+  timeout: 90
+  tags:
+    Project: "https://github.com/little-birdie/open-search-middleware"
+    Environment: "${sls:stage}"
+    team: "Product Discovery"
+    Revision: "${sls:stage}"
+    service_name: "open-search-service"
+    Maintainer_Software: "Serverless Framework"
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    layer:
+      name: "${sls:stage}-browser-extension-layer-3-8"
+      description: Python requirements lambda layer
+      compatibleRuntimes:
+        - python3.8
+      licenseInfo: GPLv3
+      allowedAccounts:
+        - '*'
+    dockerizePip: non-linux
+    fileName: "requirements.txt"
+    pythonBin: python3
+    useDownloadCache: false
+    useStaticCache: false
+    cacheLocation: '.cache'
+    slim: true
